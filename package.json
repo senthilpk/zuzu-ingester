@@ -3,7 +3,8 @@
 	"scripts": {
 		"dev": "bun run --hot src/index.ts",
 		"format": "bunx biome format --write .",
-    "test": "vitest"
+		"test": "vitest",
+		"test:watch": "vitest --watch"
 	},
 	"dependencies": {
 		"hono": "^4.8.4"
