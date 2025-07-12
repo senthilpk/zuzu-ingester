@@ -2,6 +2,7 @@
 	"name": "zuzu-ingester",
 	"scripts": {
 		"dev": "bun run --hot src/index.ts",
+		"build": "bun build src/index.ts --outdir dist --target bun",
 		"format": "bunx biome format --write .",
 		"test": "vitest",
 		"test:watch": "vitest --watch"
