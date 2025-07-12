@@ -12,7 +12,7 @@ describe("ValidationService", () => {
 
 	it("should throw an error if validation fails", () => {
 		const schema = z.object({ name: z.string() });
-		const data = { name: 123 ,age: "senth" };
+		const data = { name: 123, age: "senth" };
 		expect(() => ValidationService.validate(schema, data)).toThrow();
 	});
 });

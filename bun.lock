@@ -4,12 +4,14 @@
     "": {
       "name": "zuzu-ingester",
       "dependencies": {
+        "@hono/node-server": "^1.8.2",
         "@hono/zod-openapi": "^0.9.0",
         "hono": "^4.8.4",
         "zod": "^3.22.4",
       },
       "devDependencies": {
         "@biomejs/biome": "2.1.1",
+        "@hono/swagger-ui": "^0.5.2",
         "@types/bun": "latest",
         "vitest": "^3.2.4",
       },
@@ -87,6 +89,10 @@
     "@esbuild/win32-ia32": ["@esbuild/win32-ia32@0.25.6", "", { "os": "win32", "cpu": "ia32" }, "sha512-4AWhgXmDuYN7rJI6ORB+uU9DHLq/erBbuMoAuB4VWJTu5KtCgcKYPynF0YI1VkBNuEfjNlLrFr9KZPJzrtLkrQ=="],
 
     "@esbuild/win32-x64": ["@esbuild/win32-x64@0.25.6", "", { "os": "win32", "cpu": "x64" }, "sha512-NgJPHHbEpLQgDH2MjQu90pzW/5vvXIZ7KOnPyNBm92A6WgZ/7b6fJyUBjoumLqeOQQGqY2QjQxRo97ah4Sj0cA=="],
+
+    "@hono/node-server": ["@hono/node-server@1.15.0", "", { "peerDependencies": { "hono": "^4" } }, "sha512-MjmK4l5N4dQpZ9OSWN0tCj7ejuc7WvuWMzSKtc89bnknJykAeHxzRigXBTYZk85H6Awrii6RM59iUiUluApu2A=="],
+
+    "@hono/swagger-ui": ["@hono/swagger-ui@0.5.2", "", { "peerDependencies": { "hono": "*" } }, "sha512-7wxLKdb8h7JTdZ+K8DJNE3KXQMIpJejkBTQjrYlUWF28Z1PGOKw6kUykARe5NTfueIN37jbyG/sBYsbzXzG53A=="],
 
     "@hono/zod-openapi": ["@hono/zod-openapi@0.9.10", "", { "dependencies": { "@asteasolutions/zod-to-openapi": "^5.5.0", "@hono/zod-validator": "0.2.1" }, "peerDependencies": { "hono": ">=3.11.3", "zod": "3.*" } }, "sha512-v/b/z0qPxDo952gjRyhJ0n9ifbPoIluR2KmXDL20np0hj99+XvakoIHK5/T/3+hUmXlTj1Kn3TiGsSV6hwZesg=="],
 
