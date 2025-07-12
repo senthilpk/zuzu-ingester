@@ -2,13 +2,15 @@
 	"name": "zuzu-ingester",
 	"scripts": {
 		"dev": "bun run --hot src/index.ts",
-		"format": "bunx biome format --write ."
+		"format": "bunx biome format --write .",
+    "test": "vitest"
 	},
 	"dependencies": {
 		"hono": "^4.8.4"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.1.1",
-		"@types/bun": "latest"
+		"@types/bun": "latest",
+		"vitest": "^3.2.4"
 	}
 }
