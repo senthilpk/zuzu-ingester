@@ -1,11 +1,13 @@
 import { OpenAPIHono } from "@hono/zod-openapi";
 import healthRoute from "./api/routes/health";
+import processingRoute from "./api/routes/processing";
 import { swaggerUI } from "@hono/swagger-ui";
 
 const app = new OpenAPIHono();
 
 // Add routes
 app.route("/", healthRoute);
+app.route("/api", processingRoute);
 
 // OpenAPI documentation
 app.doc("/doc", {

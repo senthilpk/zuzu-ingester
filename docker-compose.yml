@@ -8,10 +8,10 @@ services:
     environment:
       - NODE_ENV=development
       - DATABASE_URL=postgresql://postgres:password@postgres:5432/zuzu_ingester
-      - AWS_REGION=us-east-1
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-}
-      - S3_BUCKET_NAME=${S3_BUCKET_NAME:-}
+      - S3_BUCKET=zuzu-inbox
+      - S3_REGION=<provide your region>
+      - S3_ACCESS_KEY=<provide your access key>
+      - S3_SECRET_KEY=<provide your secret key>
     depends_on:
       - postgres
     volumes:

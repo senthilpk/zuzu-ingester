@@ -1,0 +1,24 @@
+CREATE INDEX "idx_hotels_hotel_id" ON "hotels" USING btree ("hotel_id");--> statement-breakpoint
+CREATE INDEX "idx_hotels_platform" ON "hotels" USING btree ("platform");--> statement-breakpoint
+CREATE INDEX "idx_hotels_overall_score" ON "hotels" USING btree ("overall_score");--> statement-breakpoint
+CREATE INDEX "idx_hotels_review_count" ON "hotels" USING btree ("review_count");--> statement-breakpoint
+CREATE INDEX "idx_processing_jobs_job_id" ON "processing_jobs" USING btree ("job_id");--> statement-breakpoint
+CREATE INDEX "idx_processing_jobs_filepath" ON "processing_jobs" USING btree ("filepath");--> statement-breakpoint
+CREATE INDEX "idx_processing_jobs_status" ON "processing_jobs" USING btree ("status");--> statement-breakpoint
+CREATE INDEX "idx_processing_jobs_created_at" ON "processing_jobs" USING btree ("created_at");--> statement-breakpoint
+CREATE INDEX "idx_processing_jobs_platform" ON "processing_jobs" USING btree ("platform");--> statement-breakpoint
+CREATE INDEX "idx_reviewers_country_id" ON "reviewers" USING btree ("country_id");--> statement-breakpoint
+CREATE INDEX "idx_reviewers_review_group_name" ON "reviewers" USING btree ("review_group_name");--> statement-breakpoint
+CREATE INDEX "idx_reviewers_display_member_name" ON "reviewers" USING btree ("display_member_name");--> statement-breakpoint
+CREATE INDEX "idx_reviewers_is_expert_reviewer" ON "reviewers" USING btree ("is_expert_reviewer");--> statement-breakpoint
+CREATE INDEX "idx_reviews_hotel_review_id" ON "reviews" USING btree ("hotel_review_id");--> statement-breakpoint
+CREATE INDEX "idx_reviews_hotel_id" ON "reviews" USING btree ("hotel_id");--> statement-breakpoint
+CREATE INDEX "idx_reviews_reviewer_id" ON "reviews" USING btree ("reviewer_id");--> statement-breakpoint
+CREATE INDEX "idx_reviews_platform" ON "reviews" USING btree ("platform");--> statement-breakpoint
+CREATE INDEX "idx_reviews_rating" ON "reviews" USING btree ("rating");--> statement-breakpoint
+CREATE INDEX "idx_reviews_review_date" ON "reviews" USING btree ("review_date");--> statement-breakpoint
+CREATE INDEX "idx_reviews_processing_job_id" ON "reviews" USING btree ("processing_job_id");--> statement-breakpoint
+CREATE INDEX "idx_reviews_provider_id" ON "reviews" USING btree ("provider_id");--> statement-breakpoint
+CREATE INDEX "idx_reviews_is_show_review_response" ON "reviews" USING btree ("is_show_review_response");--> statement-breakpoint
+CREATE INDEX "idx_reviews_hotel_platform" ON "reviews" USING btree ("hotel_id","platform");--> statement-breakpoint
+CREATE INDEX "idx_reviews_rating_date" ON "reviews" USING btree ("rating","review_date");

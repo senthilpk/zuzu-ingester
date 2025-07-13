@@ -1,0 +1,1 @@
+ALTER TABLE "reviews" ALTER COLUMN "processing_job_id" SET DATA TYPE varchar(255);

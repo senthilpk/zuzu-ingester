@@ -1,0 +1,843 @@
+{
+	"id": "7ca8edb8-ec8b-4e4d-acd7-a32b0b70a553",
+	"prevId": "c064c48a-1dce-4a49-92ff-bff40611afec",
+	"version": "7",
+	"dialect": "postgresql",
+	"tables": {
+		"public.hotels": {
+			"name": "hotels",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "serial",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"hotel_id": {
+					"name": "hotel_id",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"platform": {
+					"name": "platform",
+					"type": "varchar(50)",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"hotel_name": {
+					"name": "hotel_name",
+					"type": "varchar(500)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"overall_score": {
+					"name": "overall_score",
+					"type": "numeric(3, 1)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"review_count": {
+					"name": "review_count",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false,
+					"default": 0
+				},
+				"grades": {
+					"name": "grades",
+					"type": "jsonb",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp",
+					"primaryKey": false,
+					"notNull": false,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp",
+					"primaryKey": false,
+					"notNull": false,
+					"default": "now()"
+				}
+			},
+			"indexes": {
+				"idx_hotels_hotel_id": {
+					"name": "idx_hotels_hotel_id",
+					"columns": [
+						{
+							"expression": "hotel_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				},
+				"idx_hotels_platform": {
+					"name": "idx_hotels_platform",
+					"columns": [
+						{
+							"expression": "platform",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				},
+				"idx_hotels_overall_score": {
+					"name": "idx_hotels_overall_score",
+					"columns": [
+						{
+							"expression": "overall_score",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				},
+				"idx_hotels_review_count": {
+					"name": "idx_hotels_review_count",
+					"columns": [
+						{
+							"expression": "review_count",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {
+				"hotels_hotel_id_unique": {
+					"name": "hotels_hotel_id_unique",
+					"nullsNotDistinct": false,
+					"columns": ["hotel_id"]
+				}
+			},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.processing_jobs": {
+			"name": "processing_jobs",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "serial",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"job_id": {
+					"name": "job_id",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"filepath": {
+					"name": "filepath",
+					"type": "varchar(500)",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"platform": {
+					"name": "platform",
+					"type": "varchar(50)",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"storage_provider": {
+					"name": "storage_provider",
+					"type": "varchar(50)",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"status": {
+					"name": "status",
+					"type": "varchar(50)",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "'pending'"
+				},
+				"total_records": {
+					"name": "total_records",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false,
+					"default": 0
+				},
+				"valid_records": {
+					"name": "valid_records",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false,
+					"default": 0
+				},
+				"invalid_records": {
+					"name": "invalid_records",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false,
+					"default": 0
+				},
+				"processing_time_ms": {
+					"name": "processing_time_ms",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false,
+					"default": 0
+				},
+				"errors": {
+					"name": "errors",
+					"type": "jsonb",
+					"primaryKey": false,
+					"notNull": false,
+					"default": "'[]'::jsonb"
+				},
+				"metadata": {
+					"name": "metadata",
+					"type": "jsonb",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"started_at": {
+					"name": "started_at",
+					"type": "timestamp",
+					"primaryKey": false,
+					"notNull": false,
+					"default": "now()"
+				},
+				"completed_at": {
+					"name": "completed_at",
+					"type": "timestamp",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp",
+					"primaryKey": false,
+					"notNull": false,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp",
+					"primaryKey": false,
+					"notNull": false,
+					"default": "now()"
+				}
+			},
+			"indexes": {
+				"idx_processing_jobs_job_id": {
+					"name": "idx_processing_jobs_job_id",
+					"columns": [
+						{
+							"expression": "job_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				},
+				"idx_processing_jobs_filepath": {
+					"name": "idx_processing_jobs_filepath",
+					"columns": [
+						{
+							"expression": "filepath",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				},
+				"idx_processing_jobs_status": {
+					"name": "idx_processing_jobs_status",
+					"columns": [
+						{
+							"expression": "status",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				},
+				"idx_processing_jobs_created_at": {
+					"name": "idx_processing_jobs_created_at",
+					"columns": [
+						{
+							"expression": "created_at",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				},
+				"idx_processing_jobs_platform": {
+					"name": "idx_processing_jobs_platform",
+					"columns": [
+						{
+							"expression": "platform",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {
+				"processing_jobs_job_id_unique": {
+					"name": "processing_jobs_job_id_unique",
+					"nullsNotDistinct": false,
+					"columns": ["job_id"]
+				}
+			},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.reviewers": {
+			"name": "reviewers",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "serial",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"display_member_name": {
+					"name": "display_member_name",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"country_name": {
+					"name": "country_name",
+					"type": "varchar(100)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"country_id": {
+					"name": "country_id",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"flag_name": {
+					"name": "flag_name",
+					"type": "varchar(10)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"review_group_name": {
+					"name": "review_group_name",
+					"type": "varchar(100)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"room_type_name": {
+					"name": "room_type_name",
+					"type": "varchar(200)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"length_of_stay": {
+					"name": "length_of_stay",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"reviewer_reviewed_count": {
+					"name": "reviewer_reviewed_count",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false,
+					"default": 0
+				},
+				"is_expert_reviewer": {
+					"name": "is_expert_reviewer",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false,
+					"default": false
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp",
+					"primaryKey": false,
+					"notNull": false,
+					"default": "now()"
+				}
+			},
+			"indexes": {
+				"idx_reviewers_country_id": {
+					"name": "idx_reviewers_country_id",
+					"columns": [
+						{
+							"expression": "country_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				},
+				"idx_reviewers_review_group_name": {
+					"name": "idx_reviewers_review_group_name",
+					"columns": [
+						{
+							"expression": "review_group_name",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				},
+				"idx_reviewers_display_member_name": {
+					"name": "idx_reviewers_display_member_name",
+					"columns": [
+						{
+							"expression": "display_member_name",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				},
+				"idx_reviewers_is_expert_reviewer": {
+					"name": "idx_reviewers_is_expert_reviewer",
+					"columns": [
+						{
+							"expression": "is_expert_reviewer",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.reviews": {
+			"name": "reviews",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "serial",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"hotel_review_id": {
+					"name": "hotel_review_id",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"hotel_id": {
+					"name": "hotel_id",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"reviewer_id": {
+					"name": "reviewer_id",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"platform": {
+					"name": "platform",
+					"type": "varchar(50)",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"rating": {
+					"name": "rating",
+					"type": "numeric(3, 1)",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"rating_text": {
+					"name": "rating_text",
+					"type": "varchar(100)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"review_title": {
+					"name": "review_title",
+					"type": "varchar(500)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"review_comments": {
+					"name": "review_comments",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"review_positives": {
+					"name": "review_positives",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"review_negatives": {
+					"name": "review_negatives",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"review_date": {
+					"name": "review_date",
+					"type": "timestamp",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"check_in_date_month_and_year": {
+					"name": "check_in_date_month_and_year",
+					"type": "varchar(50)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"is_show_review_response": {
+					"name": "is_show_review_response",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false,
+					"default": false
+				},
+				"responder_name": {
+					"name": "responder_name",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"response_date_text": {
+					"name": "response_date_text",
+					"type": "varchar(100)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"translate_source": {
+					"name": "translate_source",
+					"type": "varchar(10)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"translate_target": {
+					"name": "translate_target",
+					"type": "varchar(10)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"encrypted_review_data": {
+					"name": "encrypted_review_data",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"provider_id": {
+					"name": "provider_id",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"review_provider_text": {
+					"name": "review_provider_text",
+					"type": "varchar(100)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"processing_job_id": {
+					"name": "processing_job_id",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp",
+					"primaryKey": false,
+					"notNull": false,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp",
+					"primaryKey": false,
+					"notNull": false,
+					"default": "now()"
+				}
+			},
+			"indexes": {
+				"idx_reviews_hotel_review_id": {
+					"name": "idx_reviews_hotel_review_id",
+					"columns": [
+						{
+							"expression": "hotel_review_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				},
+				"idx_reviews_hotel_id": {
+					"name": "idx_reviews_hotel_id",
+					"columns": [
+						{
+							"expression": "hotel_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				},
+				"idx_reviews_reviewer_id": {
+					"name": "idx_reviews_reviewer_id",
+					"columns": [
+						{
+							"expression": "reviewer_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				},
+				"idx_reviews_platform": {
+					"name": "idx_reviews_platform",
+					"columns": [
+						{
+							"expression": "platform",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				},
+				"idx_reviews_rating": {
+					"name": "idx_reviews_rating",
+					"columns": [
+						{
+							"expression": "rating",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				},
+				"idx_reviews_review_date": {
+					"name": "idx_reviews_review_date",
+					"columns": [
+						{
+							"expression": "review_date",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				},
+				"idx_reviews_processing_job_id": {
+					"name": "idx_reviews_processing_job_id",
+					"columns": [
+						{
+							"expression": "processing_job_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				},
+				"idx_reviews_provider_id": {
+					"name": "idx_reviews_provider_id",
+					"columns": [
+						{
+							"expression": "provider_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				},
+				"idx_reviews_is_show_review_response": {
+					"name": "idx_reviews_is_show_review_response",
+					"columns": [
+						{
+							"expression": "is_show_review_response",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				},
+				"idx_reviews_hotel_platform": {
+					"name": "idx_reviews_hotel_platform",
+					"columns": [
+						{
+							"expression": "hotel_id",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "platform",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				},
+				"idx_reviews_rating_date": {
+					"name": "idx_reviews_rating_date",
+					"columns": [
+						{
+							"expression": "rating",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						},
+						{
+							"expression": "review_date",
+							"isExpression": false,
+							"asc": true,
+							"nulls": "last"
+						}
+					],
+					"isUnique": false,
+					"concurrently": false,
+					"method": "btree",
+					"with": {}
+				}
+			},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {
+				"reviews_hotel_review_id_unique": {
+					"name": "reviews_hotel_review_id_unique",
+					"nullsNotDistinct": false,
+					"columns": ["hotel_review_id"]
+				}
+			},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		}
+	},
+	"enums": {},
+	"schemas": {},
+	"sequences": {},
+	"roles": {},
+	"policies": {},
+	"views": {},
+	"_meta": {
+		"columns": {},
+		"schemas": {},
+		"tables": {}
+	}
+}

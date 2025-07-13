@@ -1,0 +1,9 @@
+{
+  "filepath": "agoda/agoda_com_2025-04-10.jl",
+  "platform": "agoda",
+  "storageProvider": "s3",
+  "options": {
+    "validateRecords": true,
+    "storeToDatabase": true,
+  }
+}

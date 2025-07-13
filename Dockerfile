@@ -19,5 +19,12 @@ FROM base AS development
 # Expose port
 EXPOSE 3000
 
-# Start the application in development mode
-CMD ["bun", "run", "dev"] 
+# Create a startup script that runs migrations first
+RUN echo '#!/bin/sh\n\
+echo "Running database migrations..."\n\
+bun run db:migrate\n\
+echo "Starting application..."\n\
+bun run dev' > /app/start.sh && chmod +x /app/start.sh
+
+# Start the application with migrations
+CMD ["/app/start.sh"] 

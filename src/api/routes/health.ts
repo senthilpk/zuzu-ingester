@@ -1,12 +1,7 @@
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { z } from "zod";
+import { HealthResponseSchema } from "../schemas";
 
 const healthRoute = new OpenAPIHono();
-
-const HealthResponseSchema = z.object({
-	status: z.enum(["healthy", "unhealthy"]),
-	timestamp: z.string(),
-});
 
 const healthResponse = {
 	content: {
