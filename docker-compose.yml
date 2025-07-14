@@ -1,0 +1,43 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/zuzu_ingester
+      - S3_BUCKET=zuzu-inbox
+      - S3_REGION=<provide your region>
+      - S3_ACCESS_KEY=<provide your access key>
+      - S3_SECRET_KEY=<provide your secret key>
+    depends_on:
+      - postgres
+    volumes:
+      - ./src:/app/src
+      - ./package.json:/app/package.json
+      - ./bun.lock:/app/bun.lock
+      - ./tsconfig.json:/app/tsconfig.json
+    networks:
+      - zuzu-network
+
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=zuzu_ingester
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - zuzu-network
+
+volumes:
+  postgres_data:
+
+networks:
+  zuzu-network:
+    driver: bridge 

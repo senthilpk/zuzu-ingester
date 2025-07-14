@@ -1,0 +1,27 @@
+{
+	"version": "7",
+	"dialect": "postgresql",
+	"entries": [
+		{
+			"idx": 0,
+			"version": "7",
+			"when": 1752415945124,
+			"tag": "0000_sparkling_tigra",
+			"breakpoints": true
+		},
+		{
+			"idx": 1,
+			"version": "7",
+			"when": 1752416119943,
+			"tag": "0001_next_makkari",
+			"breakpoints": true
+		},
+		{
+			"idx": 2,
+			"version": "7",
+			"when": 1752428343262,
+			"tag": "0002_fast_speed_demon",
+			"breakpoints": true
+		}
+	]
+}
